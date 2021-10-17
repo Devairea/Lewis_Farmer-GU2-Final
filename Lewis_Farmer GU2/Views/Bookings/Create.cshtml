@@ -1,0 +1,188 @@
+﻿@model Lewis_Farmer_GU2.ViewModels.CreateBookingViewModel
+@using Lewis_Farmer_GU2.ViewModels
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "MOT",
+        Value = "MOT"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Repair",
+        Value = "Repair",
+        Selected = true
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Customisation / Detailing",
+        Value = "Customisation"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Consultation",
+        Value = "Consultation"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Other",
+        Value = "Other"
+    });
+}
+
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg" style="background-image: url('../Images/breadcrumb.png')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Booking Creator</h2>
+                        <p>Bookings<span>//</span>Create Wizard</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb end-->
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReasonForBooking, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ReasonForBooking, listItems@*, "--Select--", new { @id = "ReasonId", @class = "form-control" })*@)
+                @Html.ValidationMessageFor(model => model.ReasonForBooking, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<script type="text/javascript">
+                $(document).ready(function ()
+                {
+                    $("#ReasonId").onchange(function ()
+                    {
+                        // Home is your controller, Index is your action name
+                        $("#PartialDiv").load("@Url.Action("GetReasonPartial", "Bookings")", { 'value': 'other' },
+                            function (response, status, xhr)
+                            {
+                                if (status == "error")
+                                {
+                                    alert("An error occurred while loading the results.");
+                                }
+                            });
+                    });
+                });
+            </script>
+
+            <div id="PartialDiv">
+
+            </div>*@
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">*@
+        @*@Html.LabelFor(model => model.CompletionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CompletionDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CompletionDate, "", new { @class = "text-danger" })
+            </div>*@
+        @*@Html.HiddenFor(model => model.CompletionDate)
+            </div>*@
+
+        @*<div class="form-group">*@
+        @*@Html.LabelFor(model => model.BookingStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BookingStatus, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BookingStatus, "", new { @class = "text-danger" })
+            </div>*@
+        @*@Html.HiddenFor(model => model.BookingStatus)
+            </div>*@
+
+        @*<div class="form-group">*@
+        @*@Html.LabelFor(model => model.PaymentMethod, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        @*<div class="col-md-10">
+                @Html.EditorFor(model => model.PaymentMethod, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PaymentMethod, "", new { @class = "text-danger" })
+            </div>*@
+        @*@Html.HiddenFor(model => model.PaymentMethod)
+            </div>*@
+
+        @*<div class="form-group">*@
+        @*@Html.LabelFor(model => model.PaymentComplete, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.PaymentComplete)
+                    @Html.ValidationMessageFor(model => model.PaymentComplete, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        @*@Html.HiddenFor(model => model.PaymentComplete)
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CustomerId, "CustomerId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CustomerId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.RegistrationNo, "RegistrationNo", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("RegistrationNo", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RegistrationNo, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="col-md-10">
+                @Html.HiddenFor(model => model.CustomerId)
+                @Html.HiddenFor(model => model.RegistrationNo)
+            </div>*@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+    <div class="about_text">
+        <p>
+            @foreach (var item in ViewBag.OccupiedDates)
+            {
+                @item.DueDate;<h1>||</h1>            
+            }
+        </p>
+    </div>
+
+@foreach (var item in listItems)
+{
+    @Html.Partial("_BookingReasonPartial", new BookingReasonPartialViewModel(item.Value))
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

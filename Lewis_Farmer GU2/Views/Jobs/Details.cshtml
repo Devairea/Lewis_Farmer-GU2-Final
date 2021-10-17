@@ -1,0 +1,98 @@
+﻿@model Lewis_Farmer_GU2.Models.Job
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Job</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AssignedStaff.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssignedStaff.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Booking.ReasonForBooking)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Booking.ReasonForBooking)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Part.PartName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Part.PartName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Memo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Memo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCompleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCompleted)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.JobId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

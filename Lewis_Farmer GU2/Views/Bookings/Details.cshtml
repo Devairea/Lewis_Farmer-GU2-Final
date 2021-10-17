@@ -1,0 +1,173 @@
+﻿@model Lewis_Farmer_GU2.Models.Booking
+@{
+    ViewBag.Title = "Details";
+}
+
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg" style="background-image: url('../../Images/breadcrumb.png');
+">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>PRIVATE BOOKING DETAILS</h2>
+                        <p>@Model.Customer.FirstName @Model.Customer.LastName<span>//</span>Bookings<span>//</span>@Model.BookingStatus</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehicle.Make)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehicle.Make)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReasonForBooking)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReasonForBooking)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompletionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompletionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentComplete)
+        </dd>
+    </dl>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Assigned Staff Member
+        </th>
+        <th>
+            Job Name
+        </th>
+        <th>
+            Job Description
+        </th>
+        <th>
+            Job's Total Cost
+        </th>
+        <th>
+            Job Status
+        </th>
+        <th>
+            Initial Due Date
+        </th>
+        <th>
+            Date Completed
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.ListOfJobs)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssignedStaff.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCompleted)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Jobs", new { id = item.JobId }) |
+                @Html.ActionLink("Details", "Details", "Jobs", new { id = item.JobId }) |
+                @Html.ActionLink("Delete", "Delete", "Jobs", new { id = item.JobId })
+            </td>
+        </tr>
+    }
+</table>
+
+<div style="text-align:right">@Html.ActionLink("View As .PDF", "PrintBookingPDF", new { id = Model.BookingId })</div>
+
+@if (Model.BookingStatus.Equals("Awaiting Payment") && User.IsInRole("Customer"))
+{
+    <form action="/Payment/Charge" method="POST">
+        <article>
+            <label>Amount: @Model.CalculateCostDisplay().ToString("C2")</label>
+        </article>
+        <script src="//checkout.stripe.com/v2/checkout.js"
+                class="stripe-button"
+                data-key="@ViewBag.StripePublishKey"
+                data-locale="auto"
+                data-description="Sample Charge"
+                data-amount="@Model.CalculateCostUse().ToString()">
+        </script>
+    </form>
+}
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

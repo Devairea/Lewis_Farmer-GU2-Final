@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Lewis_Farmer_GU2.Models.Part>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Add Part", "Create") || @Html.ActionLink("Add Supplier", "Create", "Suppliers")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PartSupplier.SupplierName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartCompatibility)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartSupplier.SupplierName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StockLevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartCompatibility)
+        </td>
+        <td>
+            @Html.ActionLink("Manage", "Edit", new { id=item.PartId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PartId })
+        </td>
+    </tr>
+}
+
+</table>

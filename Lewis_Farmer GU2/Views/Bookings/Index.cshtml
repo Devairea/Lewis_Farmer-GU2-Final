@@ -1,0 +1,342 @@
+﻿@model IEnumerable<Lewis_Farmer_GU2.Models.Booking>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>List of Active Bookings</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicle.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReasonForBooking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompletionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentComplete)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.BookingStatus == "In Proggress")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vehicle.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReasonForBooking)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompletionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentComplete)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.BookingId })
+                        @Html.ActionLink("Details", "Details", new { id = item.BookingId })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.BookingId })
+                    }
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<h3>List of Bookings Awaiting Payment</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicle.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReasonForBooking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompletionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentComplete)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.BookingStatus == "Awaiting Payment")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vehicle.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReasonForBooking)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompletionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentComplete)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.BookingId })
+                        @Html.ActionLink("Details", "Details", new { id = item.BookingId })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.BookingId })
+                    }
+                </td>
+            </tr>
+        }
+
+    }
+</table>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<h3>List of Suspended Bookings</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicle.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReasonForBooking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompletionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentComplete)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.BookingStatus == "Suspended")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vehicle.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReasonForBooking)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompletionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentComplete)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.BookingId })
+                        @Html.ActionLink("Details", "Details", new { id = item.BookingId })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.BookingId })
+                    }
+                </td>
+            </tr>
+        }
+
+    }
+</table>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<h3>List of Complete Bookings</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicle.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReasonForBooking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompletionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentComplete)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.BookingStatus == "Complete")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vehicle.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReasonForBooking)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompletionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentComplete)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.BookingId })
+                        @Html.ActionLink("Details", "Details", new { id = item.BookingId })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.BookingId })
+                    }
+                </td>
+            </tr>
+        }
+
+    }
+</table>
+
+

@@ -1,0 +1,219 @@
+﻿@model Lewis_Farmer_GU2.ViewModels.EditBookingViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "In Proggress",
+        Value = "In Proggress",
+        Selected = Model.Booking.BookingStatus.Equals("In Proggress")
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Awaiting Payment",
+        Value = "Awaiting Payment",
+        Selected = Model.Booking.BookingStatus.Equals("Awaiting Payment")
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Suspended",
+        Value = "Suspended",
+        Selected = Model.Booking.BookingStatus.Equals("Suspended")
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Complete",
+        Value = "Complete",
+        Selected = Model.Booking.BookingStatus.Equals("Complete")
+    });
+}
+
+@{
+    List<SelectListItem> listItems2 = new List<SelectListItem>();
+    listItems2.Add(new SelectListItem
+    {
+        Text = "MOT",
+        Value = "MOT"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "Repair",
+        Value = "Repair",
+        Selected = true
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "Customisation / Detailing",
+        Value = "Customisation"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "Consultation",
+        Value = "Consultation"
+    });
+    listItems2.Add(new SelectListItem
+    {
+        Text = "Other",
+        Value = "Other"
+    });
+}
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg" style="background-image: url('../Images/breadcrumb.png')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Booking Editor</h2>
+                        <p>Bookings<span>//</span>Edit Wizard</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb end-->
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Booking</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Booking.BookingId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Booking.ReasonForBooking, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Booking.ReasonForBooking, listItems2)
+                @Html.ValidationMessageFor(model => model.Booking.ReasonForBooking, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Booking.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Booking.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Booking.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.Booking.StartDate)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Booking.CompletionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Booking.CompletionDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Booking.CompletionDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.Booking.CompletionDate)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Booking.BookingStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Booking.BookingStatus, listItems)
+                @Html.ValidationMessageFor(model => model.Booking.BookingStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Booking.PaymentMethod, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Booking.PaymentMethod, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Booking.PaymentMethod, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Booking.PaymentComplete, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Booking.PaymentComplete)
+                    @Html.ValidationMessageFor(model => model.Booking.PaymentComplete, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.HiddenFor(model => model.Booking.CustomerId)
+        </div>
+
+        <div class="form-group">
+            @Html.HiddenFor(model => model.Booking.RegistrationNo)
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobExample.AssignedStaff.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobExample.JobName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobExample.JobCost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobExample.JobStatus)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.ListOfJobs)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AssignedStaff.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobStatus)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Jobs", new { id = item.JobId }, null) |
+                        @Html.ActionLink("Details", "Details", "Jobs", new { id = item.JobId }, null) |
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <p><input type="button" class="btn btn-info" value="Add Job To Booking" onclick="location.href='@Url.Action("Create", "Jobs", new { id=Model.Booking.BookingId })'" /></p>
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <p><input type="button" class="btn btn-info" value="Complete Booking" onclick="location.href='@Url.Action("Complete", "Bookings", new { id=Model.Booking.BookingId })'" /></p>
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save Changes" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

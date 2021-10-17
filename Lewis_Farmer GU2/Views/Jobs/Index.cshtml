@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Lewis_Farmer_GU2.Models.Job>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AssignedStaff.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Booking.ReasonForBooking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Part.PartName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Memo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCompleted)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignedStaff.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Booking.ReasonForBooking)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Part.PartName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Memo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCompleted)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.JobId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.JobId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.JobId })
+        </td>
+    </tr>
+}
+
+</table>
